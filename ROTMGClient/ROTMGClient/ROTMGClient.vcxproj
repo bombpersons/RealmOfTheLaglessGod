@@ -1,0 +1,467 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{AA347706-B0B3-4289-9B2D-E457D1A9696D}</ProjectGuid>
+    <RootNamespace>ROTMGClient</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>$(ProjectDir)\Include;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LibraryPath>$(ProjectDir)\Lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>$(ProjectDir)\Include;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LibraryPath>$(ProjectDir)\Lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>user32.lib;Advapi32.lib;botand.lib;</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>user32.lib;Advapi32.lib;botan.lib;</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Src\ARC4\ARC4.cpp" />
+    <ClCompile Include="Src\Base64\Base64.cpp" />
+    <ClCompile Include="Src\main.cpp" />
+    <ClCompile Include="Src\Misc\BaseConverter.cpp" />
+    <ClCompile Include="Src\ROTMG\Encryption\Encryption.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Include\ARC4\ARC4.hpp" />
+    <ClInclude Include="Include\Base64\Base64.hpp" />
+    <ClInclude Include="Include\Botan\adler32.h" />
+    <ClInclude Include="Include\Botan\aes.h" />
+    <ClInclude Include="Include\Botan\algo_base.h" />
+    <ClInclude Include="Include\Botan\algo_factory.h" />
+    <ClInclude Include="Include\Botan\alg_id.h" />
+    <ClInclude Include="Include\Botan\allocate.h" />
+    <ClInclude Include="Include\Botan\arc4.h" />
+    <ClInclude Include="Include\Botan\asn1_int.h" />
+    <ClInclude Include="Include\Botan\asn1_obj.h" />
+    <ClInclude Include="Include\Botan\asn1_oid.h" />
+    <ClInclude Include="Include\Botan\asn1_str.h" />
+    <ClInclude Include="Include\Botan\auto_rng.h" />
+    <ClInclude Include="Include\Botan\b64_filt.h" />
+    <ClInclude Include="Include\Botan\base64.h" />
+    <ClInclude Include="Include\Botan\basefilt.h" />
+    <ClInclude Include="Include\Botan\bcrypt.h" />
+    <ClInclude Include="Include\Botan\benchmark.h" />
+    <ClInclude Include="Include\Botan\ber_dec.h" />
+    <ClInclude Include="Include\Botan\bigint.h" />
+    <ClInclude Include="Include\Botan\blinding.h" />
+    <ClInclude Include="Include\Botan\block_cipher.h" />
+    <ClInclude Include="Include\Botan\blowfish.h" />
+    <ClInclude Include="Include\Botan\bmw_512.h" />
+    <ClInclude Include="Include\Botan\botan.h" />
+    <ClInclude Include="Include\Botan\bswap.h" />
+    <ClInclude Include="Include\Botan\buf_comp.h" />
+    <ClInclude Include="Include\Botan\buf_filt.h" />
+    <ClInclude Include="Include\Botan\build.h" />
+    <ClInclude Include="Include\Botan\cascade.h" />
+    <ClInclude Include="Include\Botan\cast128.h" />
+    <ClInclude Include="Include\Botan\cast256.h" />
+    <ClInclude Include="Include\Botan\cbc.h" />
+    <ClInclude Include="Include\Botan\cbc_mac.h" />
+    <ClInclude Include="Include\Botan\certstor.h" />
+    <ClInclude Include="Include\Botan\cfb.h" />
+    <ClInclude Include="Include\Botan\charset.h" />
+    <ClInclude Include="Include\Botan\cmac.h" />
+    <ClInclude Include="Include\Botan\comb4p.h" />
+    <ClInclude Include="Include\Botan\cpuid.h" />
+    <ClInclude Include="Include\Botan\crc24.h" />
+    <ClInclude Include="Include\Botan\crc32.h" />
+    <ClInclude Include="Include\Botan\crl_ent.h" />
+    <ClInclude Include="Include\Botan\cryptobox.h" />
+    <ClInclude Include="Include\Botan\ctr.h" />
+    <ClInclude Include="Include\Botan\cts.h" />
+    <ClInclude Include="Include\Botan\curve_gfp.h" />
+    <ClInclude Include="Include\Botan\datastor.h" />
+    <ClInclude Include="Include\Botan\data_snk.h" />
+    <ClInclude Include="Include\Botan\data_src.h" />
+    <ClInclude Include="Include\Botan\der_enc.h" />
+    <ClInclude Include="Include\Botan\des.h" />
+    <ClInclude Include="Include\Botan\desx.h" />
+    <ClInclude Include="Include\Botan\dh.h" />
+    <ClInclude Include="Include\Botan\divide.h" />
+    <ClInclude Include="Include\Botan\dlies.h" />
+    <ClInclude Include="Include\Botan\dl_algo.h" />
+    <ClInclude Include="Include\Botan\dl_group.h" />
+    <ClInclude Include="Include\Botan\dsa.h" />
+    <ClInclude Include="Include\Botan\dyn_engine.h" />
+    <ClInclude Include="Include\Botan\eax.h" />
+    <ClInclude Include="Include\Botan\ecb.h" />
+    <ClInclude Include="Include\Botan\ecc_key.h" />
+    <ClInclude Include="Include\Botan\ecdh.h" />
+    <ClInclude Include="Include\Botan\ecdsa.h" />
+    <ClInclude Include="Include\Botan\ec_group.h" />
+    <ClInclude Include="Include\Botan\elgamal.h" />
+    <ClInclude Include="Include\Botan\eme.h" />
+    <ClInclude Include="Include\Botan\eme1.h" />
+    <ClInclude Include="Include\Botan\eme_pkcs.h" />
+    <ClInclude Include="Include\Botan\emsa.h" />
+    <ClInclude Include="Include\Botan\emsa1.h" />
+    <ClInclude Include="Include\Botan\emsa1_bsi.h" />
+    <ClInclude Include="Include\Botan\emsa2.h" />
+    <ClInclude Include="Include\Botan\emsa3.h" />
+    <ClInclude Include="Include\Botan\emsa4.h" />
+    <ClInclude Include="Include\Botan\emsa_raw.h" />
+    <ClInclude Include="Include\Botan\engine.h" />
+    <ClInclude Include="Include\Botan\entropy_src.h" />
+    <ClInclude Include="Include\Botan\exceptn.h" />
+    <ClInclude Include="Include\Botan\filter.h" />
+    <ClInclude Include="Include\Botan\filters.h" />
+    <ClInclude Include="Include\Botan\fpe_fe1.h" />
+    <ClInclude Include="Include\Botan\get_byte.h" />
+    <ClInclude Include="Include\Botan\get_pbe.h" />
+    <ClInclude Include="Include\Botan\global_state.h" />
+    <ClInclude Include="Include\Botan\gost_28147.h" />
+    <ClInclude Include="Include\Botan\gost_3410.h" />
+    <ClInclude Include="Include\Botan\gost_3411.h" />
+    <ClInclude Include="Include\Botan\has160.h" />
+    <ClInclude Include="Include\Botan\hash.h" />
+    <ClInclude Include="Include\Botan\hash_id.h" />
+    <ClInclude Include="Include\Botan\hex.h" />
+    <ClInclude Include="Include\Botan\hex_filt.h" />
+    <ClInclude Include="Include\Botan\hmac.h" />
+    <ClInclude Include="Include\Botan\hmac_rng.h" />
+    <ClInclude Include="Include\Botan\idea.h" />
+    <ClInclude Include="Include\Botan\if_algo.h" />
+    <ClInclude Include="Include\Botan\init.h" />
+    <ClInclude Include="Include\Botan\internal\algo_cache.h" />
+    <ClInclude Include="Include\Botan\internal\assert.h" />
+    <ClInclude Include="Include\Botan\internal\bit_ops.h" />
+    <ClInclude Include="Include\Botan\internal\core_engine.h" />
+    <ClInclude Include="Include\Botan\internal\defalloc.h" />
+    <ClInclude Include="Include\Botan\internal\def_powm.h" />
+    <ClInclude Include="Include\Botan\internal\dyn_load.h" />
+    <ClInclude Include="Include\Botan\internal\es_capi.h" />
+    <ClInclude Include="Include\Botan\internal\es_win32.h" />
+    <ClInclude Include="Include\Botan\internal\hres_timer.h" />
+    <ClInclude Include="Include\Botan\internal\mem_pool.h" />
+    <ClInclude Include="Include\Botan\internal\mlock.h" />
+    <ClInclude Include="Include\Botan\internal\mp_asm.h" />
+    <ClInclude Include="Include\Botan\internal\mp_asmi.h" />
+    <ClInclude Include="Include\Botan\internal\mp_core.h" />
+    <ClInclude Include="Include\Botan\internal\mutex.h" />
+    <ClInclude Include="Include\Botan\internal\mux_noop.h" />
+    <ClInclude Include="Include\Botan\internal\mux_win32.h" />
+    <ClInclude Include="Include\Botan\internal\out_buf.h" />
+    <ClInclude Include="Include\Botan\internal\pk_algs.h" />
+    <ClInclude Include="Include\Botan\internal\prefetch.h" />
+    <ClInclude Include="Include\Botan\internal\rounding.h" />
+    <ClInclude Include="Include\Botan\internal\simd_32.h" />
+    <ClInclude Include="Include\Botan\internal\simd_engine.h" />
+    <ClInclude Include="Include\Botan\internal\simd_scalar.h" />
+    <ClInclude Include="Include\Botan\internal\stl_util.h" />
+    <ClInclude Include="Include\Botan\internal\workfactor.h" />
+    <ClInclude Include="Include\Botan\internal\xor_buf.h" />
+    <ClInclude Include="Include\Botan\kasumi.h" />
+    <ClInclude Include="Include\Botan\kdf.h" />
+    <ClInclude Include="Include\Botan\kdf1.h" />
+    <ClInclude Include="Include\Botan\kdf2.h" />
+    <ClInclude Include="Include\Botan\keccak.h" />
+    <ClInclude Include="Include\Botan\keypair.h" />
+    <ClInclude Include="Include\Botan\key_filt.h" />
+    <ClInclude Include="Include\Botan\key_spec.h" />
+    <ClInclude Include="Include\Botan\libstate.h" />
+    <ClInclude Include="Include\Botan\lion.h" />
+    <ClInclude Include="Include\Botan\loadstor.h" />
+    <ClInclude Include="Include\Botan\lookup.h" />
+    <ClInclude Include="Include\Botan\look_pk.h" />
+    <ClInclude Include="Include\Botan\lubyrack.h" />
+    <ClInclude Include="Include\Botan\mac.h" />
+    <ClInclude Include="Include\Botan\mars.h" />
+    <ClInclude Include="Include\Botan\md2.h" />
+    <ClInclude Include="Include\Botan\md4.h" />
+    <ClInclude Include="Include\Botan\md5.h" />
+    <ClInclude Include="Include\Botan\mdx_hash.h" />
+    <ClInclude Include="Include\Botan\mem_ops.h" />
+    <ClInclude Include="Include\Botan\mgf1.h" />
+    <ClInclude Include="Include\Botan\misty1.h" />
+    <ClInclude Include="Include\Botan\mode_pad.h" />
+    <ClInclude Include="Include\Botan\mp_types.h" />
+    <ClInclude Include="Include\Botan\noekeon.h" />
+    <ClInclude Include="Include\Botan\noekeon_simd.h" />
+    <ClInclude Include="Include\Botan\nr.h" />
+    <ClInclude Include="Include\Botan\numthry.h" />
+    <ClInclude Include="Include\Botan\ofb.h" />
+    <ClInclude Include="Include\Botan\oids.h" />
+    <ClInclude Include="Include\Botan\openpgp.h" />
+    <ClInclude Include="Include\Botan\package.h" />
+    <ClInclude Include="Include\Botan\parsing.h" />
+    <ClInclude Include="Include\Botan\par_hash.h" />
+    <ClInclude Include="Include\Botan\passhash9.h" />
+    <ClInclude Include="Include\Botan\pbe.h" />
+    <ClInclude Include="Include\Botan\pbes1.h" />
+    <ClInclude Include="Include\Botan\pbes2.h" />
+    <ClInclude Include="Include\Botan\pbkdf.h" />
+    <ClInclude Include="Include\Botan\pbkdf1.h" />
+    <ClInclude Include="Include\Botan\pbkdf2.h" />
+    <ClInclude Include="Include\Botan\pem.h" />
+    <ClInclude Include="Include\Botan\pgp_s2k.h" />
+    <ClInclude Include="Include\Botan\pipe.h" />
+    <ClInclude Include="Include\Botan\pkcs10.h" />
+    <ClInclude Include="Include\Botan\pkcs8.h" />
+    <ClInclude Include="Include\Botan\pk_filts.h" />
+    <ClInclude Include="Include\Botan\pk_keys.h" />
+    <ClInclude Include="Include\Botan\pk_ops.h" />
+    <ClInclude Include="Include\Botan\point_gfp.h" />
+    <ClInclude Include="Include\Botan\pow_mod.h" />
+    <ClInclude Include="Include\Botan\prf_ssl3.h" />
+    <ClInclude Include="Include\Botan\prf_tls.h" />
+    <ClInclude Include="Include\Botan\prf_x942.h" />
+    <ClInclude Include="Include\Botan\pubkey.h" />
+    <ClInclude Include="Include\Botan\pubkey_enums.h" />
+    <ClInclude Include="Include\Botan\randpool.h" />
+    <ClInclude Include="Include\Botan\rc2.h" />
+    <ClInclude Include="Include\Botan\rc5.h" />
+    <ClInclude Include="Include\Botan\rc6.h" />
+    <ClInclude Include="Include\Botan\reducer.h" />
+    <ClInclude Include="Include\Botan\rfc3394.h" />
+    <ClInclude Include="Include\Botan\rmd128.h" />
+    <ClInclude Include="Include\Botan\rmd160.h" />
+    <ClInclude Include="Include\Botan\rng.h" />
+    <ClInclude Include="Include\Botan\rotate.h" />
+    <ClInclude Include="Include\Botan\rsa.h" />
+    <ClInclude Include="Include\Botan\rw.h" />
+    <ClInclude Include="Include\Botan\safer_sk.h" />
+    <ClInclude Include="Include\Botan\salsa20.h" />
+    <ClInclude Include="Include\Botan\scan_name.h" />
+    <ClInclude Include="Include\Botan\secmem.h" />
+    <ClInclude Include="Include\Botan\secqueue.h" />
+    <ClInclude Include="Include\Botan\seed.h" />
+    <ClInclude Include="Include\Botan\selftest.h" />
+    <ClInclude Include="Include\Botan\serpent.h" />
+    <ClInclude Include="Include\Botan\serp_simd.h" />
+    <ClInclude Include="Include\Botan\sha160.h" />
+    <ClInclude Include="Include\Botan\sha2_32.h" />
+    <ClInclude Include="Include\Botan\sha2_64.h" />
+    <ClInclude Include="Include\Botan\skein_512.h" />
+    <ClInclude Include="Include\Botan\skipjack.h" />
+    <ClInclude Include="Include\Botan\square.h" />
+    <ClInclude Include="Include\Botan\ssl3_mac.h" />
+    <ClInclude Include="Include\Botan\stream_cipher.h" />
+    <ClInclude Include="Include\Botan\symkey.h" />
+    <ClInclude Include="Include\Botan\sym_algo.h" />
+    <ClInclude Include="Include\Botan\tea.h" />
+    <ClInclude Include="Include\Botan\tiger.h" />
+    <ClInclude Include="Include\Botan\time.h" />
+    <ClInclude Include="Include\Botan\tss.h" />
+    <ClInclude Include="Include\Botan\turing.h" />
+    <ClInclude Include="Include\Botan\twofish.h" />
+    <ClInclude Include="Include\Botan\types.h" />
+    <ClInclude Include="Include\Botan\ui.h" />
+    <ClInclude Include="Include\Botan\version.h" />
+    <ClInclude Include="Include\Botan\whrlpool.h" />
+    <ClInclude Include="Include\Botan\wid_wake.h" />
+    <ClInclude Include="Include\Botan\x509cert.h" />
+    <ClInclude Include="Include\Botan\x509self.h" />
+    <ClInclude Include="Include\Botan\x509stor.h" />
+    <ClInclude Include="Include\Botan\x509_ca.h" />
+    <ClInclude Include="Include\Botan\x509_crl.h" />
+    <ClInclude Include="Include\Botan\x509_dn.h" />
+    <ClInclude Include="Include\Botan\x509_ext.h" />
+    <ClInclude Include="Include\Botan\x509_key.h" />
+    <ClInclude Include="Include\Botan\x509_obj.h" />
+    <ClInclude Include="Include\Botan\x919_mac.h" />
+    <ClInclude Include="Include\Botan\x931_rng.h" />
+    <ClInclude Include="Include\Botan\xtea.h" />
+    <ClInclude Include="Include\Botan\xtea_simd.h" />
+    <ClInclude Include="Include\Botan\xts.h" />
+    <ClInclude Include="Include\Crypt\3way.h" />
+    <ClInclude Include="Include\Crypt\adler32.h" />
+    <ClInclude Include="Include\Crypt\aes.h" />
+    <ClInclude Include="include\crypt\algebra.h" />
+    <ClInclude Include="include\crypt\algparam.h" />
+    <ClInclude Include="Include\Crypt\arc4.h" />
+    <ClInclude Include="include\crypt\argnames.h" />
+    <ClInclude Include="include\crypt\asn.h" />
+    <ClInclude Include="Include\Crypt\authenc.h" />
+    <ClInclude Include="Include\Crypt\base32.h" />
+    <ClInclude Include="Include\Crypt\base64.h" />
+    <ClInclude Include="Include\Crypt\basecode.h" />
+    <ClInclude Include="Include\Crypt\bench.h" />
+    <ClInclude Include="Include\Crypt\blowfish.h" />
+    <ClInclude Include="Include\Crypt\blumshub.h" />
+    <ClInclude Include="Include\Crypt\camellia.h" />
+    <ClInclude Include="Include\Crypt\cast.h" />
+    <ClInclude Include="Include\Crypt\cbcmac.h" />
+    <ClInclude Include="Include\Crypt\ccm.h" />
+    <ClInclude Include="Include\Crypt\channels.h" />
+    <ClInclude Include="Include\Crypt\cmac.h" />
+    <ClInclude Include="include\crypt\config.h" />
+    <ClInclude Include="Include\Crypt\cpu.h" />
+    <ClInclude Include="Include\Crypt\crc.h" />
+    <ClInclude Include="include\crypt\cryptlib.h" />
+    <ClInclude Include="Include\Crypt\default.h" />
+    <ClInclude Include="Include\Crypt\des.h" />
+    <ClInclude Include="Include\Crypt\dh.h" />
+    <ClInclude Include="Include\Crypt\dh2.h" />
+    <ClInclude Include="Include\Crypt\dll.h" />
+    <ClInclude Include="Include\Crypt\dmac.h" />
+    <ClInclude Include="Include\Crypt\dsa.h" />
+    <ClInclude Include="Include\Crypt\eax.h" />
+    <ClInclude Include="Include\Crypt\ec2n.h" />
+    <ClInclude Include="Include\Crypt\eccrypto.h" />
+    <ClInclude Include="Include\Crypt\ecp.h" />
+    <ClInclude Include="Include\Crypt\elgamal.h" />
+    <ClInclude Include="include\crypt\emsa2.h" />
+    <ClInclude Include="include\crypt\eprecomp.h" />
+    <ClInclude Include="Include\Crypt\esign.h" />
+    <ClInclude Include="Include\Crypt\factory.h" />
+    <ClInclude Include="Include\Crypt\files.h" />
+    <ClInclude Include="include\crypt\filters.h" />
+    <ClInclude Include="include\crypt\fips140.h" />
+    <ClInclude Include="Include\Crypt\fltrimpl.h" />
+    <ClInclude Include="Include\Crypt\gcm.h" />
+    <ClInclude Include="Include\Crypt\gf256.h" />
+    <ClInclude Include="Include\Crypt\gf2n.h" />
+    <ClInclude Include="Include\Crypt\gf2_32.h" />
+    <ClInclude Include="Include\Crypt\gfpcrypt.h" />
+    <ClInclude Include="Include\Crypt\gost.h" />
+    <ClInclude Include="Include\Crypt\gzip.h" />
+    <ClInclude Include="Include\Crypt\hex.h" />
+    <ClInclude Include="Include\Crypt\hmac.h" />
+    <ClInclude Include="Include\Crypt\hrtimer.h" />
+    <ClInclude Include="Include\Crypt\ida.h" />
+    <ClInclude Include="Include\Crypt\idea.h" />
+    <ClInclude Include="include\crypt\integer.h" />
+    <ClInclude Include="include\crypt\iterhash.h" />
+    <ClInclude Include="Include\Crypt\lubyrack.h" />
+    <ClInclude Include="Include\Crypt\luc.h" />
+    <ClInclude Include="Include\Crypt\mars.h" />
+    <ClInclude Include="Include\Crypt\md2.h" />
+    <ClInclude Include="Include\Crypt\md4.h" />
+    <ClInclude Include="Include\Crypt\md5.h" />
+    <ClInclude Include="Include\Crypt\mdc.h" />
+    <ClInclude Include="include\crypt\misc.h" />
+    <ClInclude Include="include\crypt\modarith.h" />
+    <ClInclude Include="Include\Crypt\modes.h" />
+    <ClInclude Include="Include\Crypt\modexppc.h" />
+    <ClInclude Include="Include\Crypt\mqueue.h" />
+    <ClInclude Include="Include\Crypt\mqv.h" />
+    <ClInclude Include="Include\Crypt\nbtheory.h" />
+    <ClInclude Include="Include\Crypt\network.h" />
+    <ClInclude Include="Include\Crypt\nr.h" />
+    <ClInclude Include="include\crypt\oaep.h" />
+    <ClInclude Include="Include\Crypt\oids.h" />
+    <ClInclude Include="Include\Crypt\osrng.h" />
+    <ClInclude Include="Include\Crypt\panama.h" />
+    <ClInclude Include="Include\Crypt\pch.h" />
+    <ClInclude Include="include\crypt\pkcspad.h" />
+    <ClInclude Include="Include\Crypt\polynomi.h" />
+    <ClInclude Include="Include\Crypt\pssr.h" />
+    <ClInclude Include="include\crypt\pubkey.h" />
+    <ClInclude Include="Include\Crypt\pwdbased.h" />
+    <ClInclude Include="include\crypt\queue.h" />
+    <ClInclude Include="Include\Crypt\rabin.h" />
+    <ClInclude Include="Include\Crypt\randpool.h" />
+    <ClInclude Include="Include\Crypt\rc2.h" />
+    <ClInclude Include="Include\Crypt\rc5.h" />
+    <ClInclude Include="Include\Crypt\rc6.h" />
+    <ClInclude Include="Include\Crypt\resource.h" />
+    <ClInclude Include="Include\Crypt\rijndael.h" />
+    <ClInclude Include="Include\Crypt\ripemd.h" />
+    <ClInclude Include="Include\Crypt\rng.h" />
+    <ClInclude Include="include\crypt\rsa.h" />
+    <ClInclude Include="Include\Crypt\rw.h" />
+    <ClInclude Include="Include\Crypt\safer.h" />
+    <ClInclude Include="Include\Crypt\salsa.h" />
+    <ClInclude Include="Include\Crypt\seal.h" />
+    <ClInclude Include="include\crypt\secblock.h" />
+    <ClInclude Include="Include\Crypt\seckey.h" />
+    <ClInclude Include="Include\Crypt\seed.h" />
+    <ClInclude Include="Include\Crypt\serpent.h" />
+    <ClInclude Include="Include\Crypt\serpentp.h" />
+    <ClInclude Include="include\crypt\sha.h" />
+    <ClInclude Include="Include\Crypt\shacal2.h" />
+    <ClInclude Include="Include\Crypt\shark.h" />
+    <ClInclude Include="include\crypt\simple.h" />
+    <ClInclude Include="Include\Crypt\skipjack.h" />
+    <ClInclude Include="include\crypt\smartptr.h" />
+    <ClInclude Include="Include\Crypt\socketft.h" />
+    <ClInclude Include="Include\Crypt\sosemanuk.h" />
+    <ClInclude Include="Include\Crypt\square.h" />
+    <ClInclude Include="include\crypt\stdcpp.h" />
+    <ClInclude Include="Include\Crypt\strciphr.h" />
+    <ClInclude Include="Include\Crypt\tea.h" />
+    <ClInclude Include="Include\Crypt\tiger.h" />
+    <ClInclude Include="Include\Crypt\trdlocal.h" />
+    <ClInclude Include="Include\Crypt\trunhash.h" />
+    <ClInclude Include="Include\Crypt\ttmac.h" />
+    <ClInclude Include="Include\Crypt\twofish.h" />
+    <ClInclude Include="Include\Crypt\validate.h" />
+    <ClInclude Include="Include\Crypt\vmac.h" />
+    <ClInclude Include="Include\Crypt\wait.h" />
+    <ClInclude Include="Include\Crypt\wake.h" />
+    <ClInclude Include="Include\Crypt\whrlpool.h" />
+    <ClInclude Include="Include\Crypt\winpipes.h" />
+    <ClInclude Include="Include\Crypt\words.h" />
+    <ClInclude Include="Include\Crypt\xtr.h" />
+    <ClInclude Include="Include\Crypt\xtrcrypt.h" />
+    <ClInclude Include="Include\Crypt\zdeflate.h" />
+    <ClInclude Include="Include\Crypt\zinflate.h" />
+    <ClInclude Include="Include\Crypt\zlib.h" />
+    <ClInclude Include="Include\Misc\BaseConverter.hpp" />
+    <ClInclude Include="Include\Misc\binary.hpp" />
+    <ClInclude Include="Include\ROTMG\Encryption\Encryption.hpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
