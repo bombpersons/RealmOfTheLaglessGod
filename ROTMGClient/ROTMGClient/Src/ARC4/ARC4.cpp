@@ -65,5 +65,5 @@ void ARC4::Encrypt(unsigned char* _inBuffer, unsigned char* _outBuffer, unsigned
 	}
 
 	// Reset the key
-	SetKey(key, keysize);
+	//SetKey(key, keysize);
 }

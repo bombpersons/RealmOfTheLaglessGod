@@ -15,7 +15,10 @@ Proxy::Proxy()
 	  datasend(&Proxy::DataSend, this),
 	
 	  incomingBuffer(1024 * 1024, new InReader(this)),
-	  outgoingBuffer(1024 * 1024, new OutReader(this)) {
+	  outgoingBuffer(1024 * 1024, new OutReader(this)),
+
+	  inlog("Logs/in.log", std::ios::out),
+	  outlog("Logs/out.log", std::ios::out) {
 		  running = false;
 		  encryption.LoadFrom("Config/publickey.der");
 }
@@ -181,26 +184,22 @@ void Proxy::Incoming(Packet& _pac) {
 	Packet dec = PacketDecryptor::DecryptInPacket(_pac, encryption);
 
 	// Print this out.
-	std::cout << "Decrypted Incoming Data ----------------------" << std::endl;
-	std::cout << "Packet Size: " << dec.size << std::endl;
-	std::cout << "Packet ID: " << (unsigned int)dec.id << std::endl;
-	std::cout << "Packet Data: ";
-	for (int i = 0; i < dec.size -5 ; ++i) {
-		printf("%c", dec.data[i]);
-	}
-	printf("\n");
+	inlog << "Decrypted Incoming Data ----------------------" << std::endl;
+	inlog << "Packet Size: " << dec.size - 5 << std::endl;
+	inlog << "Packet ID: " << (unsigned int)dec.id << std::endl;
+	inlog << "Packet Data: ";
+	inlog.write(dec.data, dec.size - 5);
+	inlog << std::endl;
 }
 void Proxy::Outgoing(Packet& _pac) {
 	// Decrypt it.
 	Packet dec = PacketDecryptor::DecryptOutPacket(_pac, encryption);
 
 	// Print this out.
-	std::cout << "Decrypted Outgoing Data ----------------------" << std::endl;
-	std::cout << "Packet Size: " << dec.size << std::endl;
-	std::cout << "Packet ID: " << (unsigned int)dec.id << std::endl;
-	std::cout << "Packet Data: ";
-	for (int i = 0; i < dec.size -5 ; ++i) {
-		printf("%c", dec.data[i]);
-	}
-	printf("\n");
+	outlog << "Decrypted Incoming Data ----------------------" << std::endl;
+	outlog << "Packet Size: " << dec.size - 5 << std::endl;
+	outlog << "Packet ID: " << (unsigned int)dec.id << std::endl;
+	outlog << "Packet Data: ";
+	outlog.write(dec.data, dec.size - 5);
+	outlog << std::endl;
 }

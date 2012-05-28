@@ -7,6 +7,8 @@
 #include <ROTMG/Encryption/Encryption.hpp>
 #include <ROTMG/Packets/PacketBuffer.hpp>
 
+#include <fstream>
+
 namespace rotmg {
 	class InReader;
 	class OutReader;
@@ -64,6 +66,10 @@ namespace rotmg {
 		// Incoming and outgoing packet buffers.
 		PacketBuffer incomingBuffer;
 		PacketBuffer outgoingBuffer;
+
+		// Logging file.
+		std::ofstream outlog;
+		std::ofstream inlog;
 	};
 
 	class InReader : public IPacketReader {

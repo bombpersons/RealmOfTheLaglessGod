@@ -15,15 +15,9 @@ Packet::Packet(char* _buf, unsigned int _size) {
 
 /// Fill
 void Packet::Fill(char* _buf, unsigned int _size) {
-	FILE* file = fopen("test", "w");
-	fwrite(_buf, 1, _size, file);
-	fclose(file);
-
 	// Get the size of the packet.
 	size = *(int*)_buf;
 	Endian::EndianSwap(*(unsigned int*)&size);
-	//size = _size;
-
 	_buf += sizeof(int);
 
 	// Get the id.

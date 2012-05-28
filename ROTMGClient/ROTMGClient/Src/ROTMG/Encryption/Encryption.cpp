@@ -46,8 +46,8 @@ void Encryption::LoadFrom(const std::string& _filename) {
 	}
 
 	// Create the ARC4 encoders
-	arc4Dec.SetKey(decryptionARC4, sizeof(decryptionARC4));
-	arc4Enc.SetKey(encryptionARC4, sizeof(encryptionARC4));
+	arc4Dec.set_key(decryptionARC4, sizeof(decryptionARC4));
+	arc4Enc.set_key(encryptionARC4, sizeof(encryptionARC4));
 }
 
 // Encrypt RSA
@@ -62,10 +62,10 @@ unsigned int Encryption::EncryptRSA(unsigned char* _inBuffer, int _inBufSize, un
 
 // ARC4 encryption (for outgoing packets)
 void Encryption::EncryptARC4(unsigned char* _inBuffer, unsigned char* _outBuffer, int _bufSize) {
-	arc4Enc.Encrypt(_inBuffer, _outBuffer, _bufSize);
+	arc4Enc.cipher(_inBuffer, _outBuffer, _bufSize);
 }
 
 // ARC4 decryption (for incoming packets)
 void Encryption::DecryptARC4(unsigned char* _inBuffer, unsigned char* _outBuffer, int _bufSize) {
-	arc4Dec.Encrypt(_inBuffer, _outBuffer, _bufSize);
+	arc4Dec.cipher(_inBuffer, _outBuffer, _bufSize);
 }

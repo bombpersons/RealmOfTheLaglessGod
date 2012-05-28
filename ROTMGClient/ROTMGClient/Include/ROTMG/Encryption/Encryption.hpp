@@ -5,6 +5,7 @@
 
 // RSA
 #include <Botan/rsa.h>
+#include <Botan/arc4.h>
 #include <Botan/pubkey.h>
 #include <Botan/auto_rng.h>
 
@@ -37,11 +38,11 @@ namespace rotmg {
 	private:
 		// The Decryption ARC4 Key (for incoming traffic)
 		static unsigned char decryptionARC4[];
-		ARC4 arc4Dec;
+		Botan::ARC4 arc4Dec;
 
 		// The Encryption ARC4 Key (for outgoing traffic)
 		static unsigned char encryptionARC4[];
-		ARC4 arc4Enc;
+		Botan::ARC4 arc4Enc;
 
 		// The public key (RSA). 
 		Botan::X509_PublicKey* publickey;
