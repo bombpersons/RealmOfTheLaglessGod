@@ -5,8 +5,11 @@
 #include <SFML/Network.hpp>
 
 #include <ROTMG/Encryption/Encryption.hpp>
+#include <ROTMG/Packets/PacketBuffer.hpp>
 
 namespace rotmg {
+	class InReader;
+	class OutReader;
 	class Proxy {
 	public:
 		Proxy();
@@ -35,8 +38,8 @@ namespace rotmg {
 		void DataSend();		
 
 		// Outgoing and incoming data..
-		virtual void Incoming(char* _buf, unsigned int _size);
-		virtual void Outgoing(char* _buf, unsigned int _size);
+		virtual void Incoming(Packet& _pac);
+		virtual void Outgoing(Packet& _pac);
 
 	private:
 		// The threads.
@@ -57,6 +60,46 @@ namespace rotmg {
 
 		// An encryption object to use to decrypt packets.
 		Encryption encryption;
+
+		// Incoming and outgoing packet buffers.
+		PacketBuffer incomingBuffer;
+		PacketBuffer outgoingBuffer;
+	};
+
+	class InReader : public IPacketReader {
+	public:
+		// Constructor
+		InReader(Proxy* _proxy) {
+			proxy = _proxy;
+		}
+		virtual ~InReader() {
+		}
+
+		// Read the packet.
+		virtual void RecievePacket(Packet& _packet) {
+			proxy->Incoming(_packet);
+		}
+
+	private:
+		Proxy* proxy;
+	};
+
+	class OutReader : public IPacketReader {
+	public:
+		// Constructor
+		OutReader(Proxy* _proxy) {
+			proxy = _proxy;
+		}
+		virtual ~OutReader() {
+		}
+
+		// Read the packet.
+		virtual void RecievePacket(Packet& _packet) {
+			proxy->Outgoing(_packet);
+		}
+
+	private:
+		Proxy* proxy;
 	};
 }
 

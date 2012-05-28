@@ -27,23 +27,51 @@ PacketBuffer::~PacketBuffer() {
 
 /// Read
 void PacketBuffer::Read(char* _buf, unsigned int _size) {
-	// If the packet size is 0 then this is the start of a new packet.
-	if (packetSize == 0) {
-		packetSize = *(unsigned int*)_buf;
-		Endian::EndianSwap(packetSize);
-	}
+	// Loop through the data until we have written all of it.
+	/*unsigned int written = 0;
+	while (written < _size) {
+		// If we are at the start of a packet, the get the packet size.
+		packetSize = *(int*)(_buf + written);
+		Endian::EndianSwap(*(unsigned int*)&packetSize);
 
-	// See how much of this we should write..
-	if (bufferPointer + _size > packetSize) { // There is too much to write.
-		// Write that much and then we can form a packet.
-		memcpy(buffer + bufferPointer, _buf, packetSize - bufferPointer);
-
-		// Now create a packet using that.
-		Packet pac(buffer, packetSize);
+		// Write this.
+		Packet pac(_buf + written, packetSize);
 		if (reader) reader->RecievePacket(pac);
 
-		// Okay now we can dispose of that.
-		bufferPointer = 0;
-		packetSize = 0;
+		// Inc written
+		written += packetSize;
+	}*/
+	
+	// See how much of this we should write..
+	unsigned int written = 0;
+	while (written < _size) {
+		// If we are at the start of a packet.
+		if (packetSize == 0) {
+			packetSize = *(int*)(_buf + written);
+			Endian::EndianSwap(*(unsigned int*)&packetSize);
+		}
+
+		// Write enough for a packet.
+		if (bufferPointer + _size >= packetSize) { // There is too much to write.
+			// Write that much and then we can form a packet.
+			memcpy(buffer + bufferPointer, _buf + written, packetSize - bufferPointer);
+
+			// Now create a packet using that.
+			Packet pac(buffer, packetSize);
+			if (reader) reader->RecievePacket(pac);
+
+			// Increment written.
+			written += packetSize - bufferPointer;
+
+			// Okay now we can dispose of that.
+			bufferPointer = 0;
+			packetSize = 0;
+		} else {
+			// Not enough for a full packet.
+			memcpy(buffer + bufferPointer, _buf + written, _size - written);
+			bufferPointer += _size - written;
+
+			written = _size;
+		}
 	}
 }

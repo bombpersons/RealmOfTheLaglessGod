@@ -2,6 +2,7 @@
 using namespace rotmg;
 
 #include <ROTMG/Encryption/PacketDecryptor.hpp>
+#include <ROTMG/Packets/PacketBuffer.hpp>
 
 #include <iostream>
 #include <iomanip>
@@ -11,7 +12,10 @@ Proxy::Proxy()
 	: authconn(&Proxy::AuthConn, this),
 	  authsend(&Proxy::AuthSend, this),
 	  dataconn(&Proxy::DataConn, this),
-	  datasend(&Proxy::DataSend, this) {
+	  datasend(&Proxy::DataSend, this),
+	
+	  incomingBuffer(1024 * 1024, new InReader(this)),
+	  outgoingBuffer(1024 * 1024, new OutReader(this)) {
 		  running = false;
 		  encryption.LoadFrom("Config/publickey.der");
 }
@@ -143,7 +147,7 @@ void Proxy::DataConn() {
 			//std::cout << "Client Data(2050): " << buf << std::endl;
 
 			// Outgoing
-			Outgoing(buf, size);
+			outgoingBuffer.Read(buf, size);
 
 			// Send this data to the server.
 			datasendsocket.send(buf, size);
@@ -163,7 +167,7 @@ void Proxy::DataSend() {
 			//std::cout << "Server Data(2050): " << buf << std::endl;
 
 			// Incoming data..
-			Incoming(buf, size);
+			incomingBuffer.Read(buf, size);
 
 			// Send this to the client.
 			dataconnsocket.send(buf, size);
@@ -172,12 +176,9 @@ void Proxy::DataSend() {
 }
 
 // Outgoing and incoming data..
-void Proxy::Incoming(char* _buf, unsigned int _size) {
-	// Create a packet.
-	Packet packet(_buf, _size);
-
+void Proxy::Incoming(Packet& _pac) {
 	// Decrypt it.
-	Packet dec = PacketDecryptor::DecryptInPacket(packet, encryption);
+	Packet dec = PacketDecryptor::DecryptInPacket(_pac, encryption);
 
 	// Print this out.
 	std::cout << "Decrypted Incoming Data ----------------------" << std::endl;
@@ -189,13 +190,10 @@ void Proxy::Incoming(char* _buf, unsigned int _size) {
 	}
 	printf("\n");
 }
-void Proxy::Outgoing(char* _buf, unsigned int _size) {
-	// Create a packet.
-	Packet packet(_buf, _size);
-
+void Proxy::Outgoing(Packet& _pac) {
 	// Decrypt it.
-	Packet dec = PacketDecryptor::DecryptOutPacket(packet, encryption);
-	
+	Packet dec = PacketDecryptor::DecryptOutPacket(_pac, encryption);
+
 	// Print this out.
 	std::cout << "Decrypted Outgoing Data ----------------------" << std::endl;
 	std::cout << "Packet Size: " << dec.size << std::endl;

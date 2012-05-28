@@ -39,7 +39,7 @@ namespace rotmg {
 		unsigned int lastPacketOffset;
 
 		// The size of the current packet.
-		unsigned int packetSize;
+		int packetSize;
 	};
 }
 
