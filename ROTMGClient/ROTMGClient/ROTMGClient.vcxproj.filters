@@ -48,6 +48,12 @@
     <ClCompile Include="Src\Misc\Endian.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Src\ROTMG\Packets\Packets\Failure.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\ROTMG\Packets\Packets\Packet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\Base64\Base64.hpp">
@@ -1200,6 +1206,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Include\Misc\Endian.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\ROTMG\Packets\Packets\Failure.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\ROTMG\Packets\Packets\Packet.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

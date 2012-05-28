@@ -85,6 +85,8 @@
     <ClCompile Include="Src\ROTMG\Exception\Exception.cpp" />
     <ClCompile Include="Src\ROTMG\Packets\Packet.cpp" />
     <ClCompile Include="Src\ROTMG\Packets\PacketBuffer.cpp" />
+    <ClCompile Include="Src\ROTMG\Packets\Packets\Failure.cpp" />
+    <ClCompile Include="Src\ROTMG\Packets\Packets\Packet.cpp" />
     <ClCompile Include="Src\ROTMG\Proxy\Proxy2.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -471,6 +473,8 @@
     <ClInclude Include="Include\ROTMG\Exception\Exception.hpp" />
     <ClInclude Include="Include\ROTMG\Packets\Packet.hpp" />
     <ClInclude Include="Include\ROTMG\Packets\PacketBuffer.hpp" />
+    <ClInclude Include="Include\ROTMG\Packets\Packets\Failure.hpp" />
+    <ClInclude Include="Include\ROTMG\Packets\Packets\Packet.hpp" />
     <ClInclude Include="Include\ROTMG\Proxy\Proxy2.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
