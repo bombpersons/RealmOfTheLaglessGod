@@ -195,6 +195,11 @@ void Proxy::Outgoing(Packet& _pac) {
 	// Decrypt it.
 	Packet dec = PacketDecryptor::DecryptOutPacket(_pac, encryption);
 
+	// We need to reconnect if we get a packet telling us so...
+	if (dec.id == 9) {
+
+	}
+
 	// Print this out.
 	outlog << "Decrypted Incoming Data ----------------------" << std::endl;
 	outlog << "Packet Size: " << dec.size - 5 << std::endl;
