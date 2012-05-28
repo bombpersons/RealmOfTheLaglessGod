@@ -3,6 +3,7 @@ using namespace rotmg;
 
 #include <iostream>
 #include <cstring>
+#include <Misc/Endian.hpp>
 
 /// Constructor
 Packet::Packet() {
@@ -10,14 +11,6 @@ Packet::Packet() {
 }
 Packet::Packet(char* _buf, unsigned int _size) {
 	Fill(_buf, _size);
-}
-
-inline void endian_swap(unsigned int& x)
-{
-    x = (x>>24) | 
-        ((x<<8) & 0x00FF0000) |
-        ((x>>8) & 0x0000FF00) |
-        (x<<24);
 }
 
 /// Fill
@@ -28,7 +21,7 @@ void Packet::Fill(char* _buf, unsigned int _size) {
 
 	// Get the size of the packet.
 	size = *(int*)_buf;
-	endian_swap(*(unsigned int*)&size);
+	Endian::EndianSwap(*(unsigned int*)&size);
 	//size = _size;
 
 	_buf += sizeof(int);

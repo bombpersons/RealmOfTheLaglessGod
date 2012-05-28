@@ -79,10 +79,12 @@
     <ClCompile Include="Src\Base64\Base64.cpp" />
     <ClCompile Include="Src\main.cpp" />
     <ClCompile Include="Src\Misc\BaseConverter.cpp" />
+    <ClCompile Include="Src\Misc\Endian.cpp" />
     <ClCompile Include="Src\ROTMG\Encryption\Encryption.cpp" />
     <ClCompile Include="Src\ROTMG\Encryption\PacketDecryptor.cpp" />
     <ClCompile Include="Src\ROTMG\Exception\Exception.cpp" />
     <ClCompile Include="Src\ROTMG\Packets\Packet.cpp" />
+    <ClCompile Include="Src\ROTMG\Packets\PacketBuffer.cpp" />
     <ClCompile Include="Src\ROTMG\Proxy\Proxy2.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -463,10 +465,12 @@
     <ClInclude Include="Include\Crypt\zlib.h" />
     <ClInclude Include="Include\Misc\BaseConverter.hpp" />
     <ClInclude Include="Include\Misc\binary.hpp" />
+    <ClInclude Include="Include\Misc\Endian.hpp" />
     <ClInclude Include="Include\ROTMG\Encryption\Encryption.hpp" />
     <ClInclude Include="Include\ROTMG\Encryption\PacketDecryptor.hpp" />
     <ClInclude Include="Include\ROTMG\Exception\Exception.hpp" />
     <ClInclude Include="Include\ROTMG\Packets\Packet.hpp" />
+    <ClInclude Include="Include\ROTMG\Packets\PacketBuffer.hpp" />
     <ClInclude Include="Include\ROTMG\Proxy\Proxy2.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
