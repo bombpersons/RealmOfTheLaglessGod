@@ -30,6 +30,18 @@
     <ClCompile Include="Src\ARC4\ARC4.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Src\ROTMG\Exception\Exception.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\ROTMG\Proxy\Proxy2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\ROTMG\Encryption\PacketDecryptor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\ROTMG\Packets\Packet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\Base64\Base64.hpp">
@@ -1164,6 +1176,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Include\ARC4\ARC4.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\ROTMG\Exception\Exception.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\ROTMG\Proxy\Proxy2.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\ROTMG\Encryption\PacketDecryptor.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\ROTMG\Packets\Packet.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -10,3 +10,18 @@
 *.lai
 *.la
 *.a
+
+# Visual Studio Files
+*.sdf
+*.suo
+*.opensdf
+*.ipch
+*.exe
+*.ilk
+*.pdb
+*.tlog
+*.idb
+*.obj
+*.manifest
+*.lastbuildstate
+*.log

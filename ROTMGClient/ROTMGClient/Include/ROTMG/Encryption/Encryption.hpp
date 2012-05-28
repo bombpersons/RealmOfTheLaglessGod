@@ -26,25 +26,28 @@ namespace rotmg {
 		void LoadFrom(const std::string& _filename);
 
 		// Encrypt using the RSA public key
-		void EncryptRSA(char* _inBuffer, int _inBufSize, char* _outBuffer, int _outBufSize);
+		unsigned int EncryptRSA(unsigned char* _inBuffer, int _inBufSize, unsigned char* _outBuffer, int _outBufSize);
 
 		// ARC4 encryption (for outgoing packets)
-		void EncryptARC4(char* _inBuffer, int _inBufSize, char* _outBuffer, int _outBufSize);
+		void EncryptARC4(unsigned char* _inBuffer, unsigned char* _outBuffer, int _bufSize);
 
 		// ARC4 decryption (for incoming packets)
-		void DecryptARC4(char* _inBuffer, int _inBufSize, char* _outBuffer, int _outBufSize);
+		void DecryptARC4(unsigned char* _inBuffer, unsigned char* _outBuffer, int _bufSize);
 		
 	private:
 		// The Decryption ARC4 Key (for incoming traffic)
-		unsigned char decryptionARC4[256];
-		unsigned int decryptionARC4size;
+		static unsigned char decryptionARC4[];
+		ARC4 arc4Dec;
 
 		// The Encryption ARC4 Key (for outgoing traffic)
-		unsigned char encryptionARC4[256];
-		unsigned int encryptionARC4size;
+		static unsigned char encryptionARC4[];
+		ARC4 arc4Enc;
 
 		// The public key (RSA). 
-		Botan::RSA_PublicKey publickey;
+		Botan::X509_PublicKey* publickey;
+
+		// The object used to encrypt rsa
+		Botan::PK_Encryptor_EME* encryptor;
 	};
 }
 

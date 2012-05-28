@@ -46,6 +46,9 @@ void ARC4::SetKey(unsigned char* _key, unsigned int _keysize) {
 
 /// Encrypt
 void ARC4::Encrypt(unsigned char* _inBuffer, unsigned char* _outBuffer, unsigned int _size) {
+	if (_size <= 0)
+		return;
+
 	i = 0;
 	j = 0;
 	for (int k = 0; k < _size; ++k) {

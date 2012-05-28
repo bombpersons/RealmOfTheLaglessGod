@@ -1,46 +1,13 @@
 #include <iostream>
 
-// Test the rsa library.
-#include <Botan/rsa.h>
-#include <Botan/pubkey.h>
-#include <Botan/auto_rng.h>
-#include <Base64/Base64.hpp>
-#include <Misc/BaseConverter.hpp>
-
-#include <ARC4/ARC4.hpp>
+#include <ROTMG/Encryption/Encryption.hpp>
+#include <ROTMG/Proxy/Proxy2.hpp>
 
 int main(int _argc, char** _argv) {
-	// The public key.
-	//std::string publicKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDEmgEmQcgLd0mvWqL6AKmhzjJfZoAmZC0PUmG8K9CB1Ml68P00S3eU+TSL5aG8Mg3Tipvs02gC2veC10knRi7rEsUwL8+h22EsjnpKZ/7K5YV9cefryTMnS0x4QGZbSkdPz/rLh0uGwk8Zu0cEKbxQyvd3+pSmqZ5/ZQGaFjm9TQIDAQAB";
 	
-	// Create the key so we can use it.
-	//Key publicKey(BigInt("72010245848311285469945890522148186590403034228548887119023753140627896401217308605942290311493875245546101669992291166929235145506039133732345226681848490283359922498922523342808577300919196491148683533548413435346368836506784849173848420897605821045605666175143562936779315849250871205210321319358827897127"),
-	//			  BigInt("65537"));
-	//Key privateKey(BigInt("71642157099067586786264430074997422251056023891387224589691117266204130508753390538545389823916621965608693121242006327206310785621629973871498138000059266160650661274766051940255397394218404268003132683541237470376847243565207597978637581715451012957068649974113890843054404615506489618626488603755481535889"),
-	//			  BigInt("65537"));
-	//Key publicKey(BigInt(BaseConverter::HexToDecimalConverter().Convert("00C49A012641C80B7749AF5AA2FA00A9A1CE325F668026642D0F5261BC2BD081D4C97AF0FD344B7794F9348BE5A1BC320DD38A9BECD36802DAF782D74927462EEB12C5302FCFA1DB612C8E7A4A67FECAE5857D71E7EBC933274B4C7840665B4A474FCFFACB874B86C24F19BB470429BC50CAF777FA94A6A99E7F65019A1639BD4D")),
-	//			  BigInt("65537"));
-
-	//Botan::RSA_PublicKey pubkey(Botan::BigInt("72010245848311285469945890522148186590403034228548887119023753140627896401217308605942290311493875245546101669992291166929235145506039133732345226681848490283359922498922523342808577300919196491148683533548413435346368836506784849173848420897605821045605666175143562936779315849250871205210321319358827897127"),
-	//					        Botan::BigInt("65537"));
-	//Botan::AutoSeeded_RNG rnd;
-	//Botan::RSA_PrivateKey privatekey(rnd, 1024);
-	//Botan::PK_Encryptor_EME encryptor(privatekey, "EME1(SHA-1)");
-	//Botan::PK_Decryptor_EME decryptor(privatekey, "EME1(SHA-1)");
-	//Botan::SecureVector<Botan::byte> bytes = encryptor.encrypt((Botan::byte*)"Hey!", sizeof("Hey!"), rnd);
-	//std::cout << (Botan::byte*)bytes << std::endl;
-	//Botan::SecureVector<Botan::byte> decrypted = decryptor.decrypt((Botan::byte*)bytes, bytes.size());
-	//std::cout << (Botan::byte*)decrypted << std::endl;
-
-	char* key = "Wiki";
-	char* text = "pedia";
-	ARC4 arc4((unsigned char*)key, 4);
-	unsigned char buffer[200]; memset(buffer, 0, sizeof(buffer));
-	unsigned char otherBuffer[200]; memset(otherBuffer, 0, sizeof(buffer));
-	arc4.Encrypt((unsigned char*)text, (unsigned char*)buffer, 9);
-	arc4.Encrypt(buffer, otherBuffer, 9);
-
-	int i = 0;
-	std::cin >> i;
-	return 0;
+	// Start the proxy
+	rotmg::Proxy proxy;
+	proxy.SetServerIp("176.34.240.11");
+	proxy.Start();
+	proxy.Wait();
 }
