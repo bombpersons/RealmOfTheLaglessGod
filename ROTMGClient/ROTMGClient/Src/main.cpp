@@ -3,6 +3,8 @@
 #include <ROTMG/Encryption/Encryption.hpp>
 #include <ROTMG/Proxy/Proxy2.hpp>
 #include <ROTMG/Queues/InQueue.hpp>
+#include <ROTMG/Connections/ConnectionListener.hpp>
+#include <concurrent_vector.h>
 
 class TempPacket {
 public:
@@ -38,6 +40,37 @@ public:
 	}
 };
 
+class Listener : public rotmg::ConnectionListener {
+public:
+	Listener() {}
+	virtual ~Listener() {}
+
+	// What to do when we get a new connection
+	virtual bool OnNewConnection(sf::TcpSocket* _socket) {
+		rotmg::InQueue<TempPacket>* queue = new rotmg::InQueue<TempPacket>(1024 * 1024, _socket);
+		queue->Start();
+		queues.push_back(queue);
+		return true;
+	}
+
+	// A method that will print all of the information from all clients to the console.
+	void PrintStuff() {
+		while (IsRunning()) {
+			for (VectorType::iterator it = queues.begin(); it != queues.end(); ++it) {
+				TempPacket packet;
+				if ((*it)->PopBack(packet)) {
+					Logger::TraceBuffer(packet.buffer, packet.bufSize);
+				}
+			}
+		}
+	}
+
+private:
+	// A list of connections to update from.
+	typedef Concurrency::concurrent_vector<rotmg::InQueue<TempPacket>* > VectorType;
+	VectorType queues;
+};
+
 int main(int _argc, char** _argv) {
 	
 	// Start the proxy
@@ -46,22 +79,10 @@ int main(int _argc, char** _argv) {
 	//proxy.Start();
 	//proxy.Wait();
 
-	sf::TcpListener listener;
-	sf::TcpSocket* socket = new sf::TcpSocket();
-	listener.listen(800);
-	Logger::Trace("Listening to port 800\n");
-	listener.accept(*socket);
-	Logger::Trace("Connection established!\n");
-
-	rotmg::InQueue<TempPacket> q(1024 * 1024);
-	q.Connect(socket);
-	q.Start();
-	while (q.IsRunning()) {
-		TempPacket packet;
-		if (q.PopBack(packet)) {
-			Logger::TraceBuffer(packet.buffer, packet.bufSize);
-		}
-	}
+	Listener listener;
+	listener.Listen(800);
+	listener.Start();
+	listener.PrintStuff();
 
 	int i;
 	std::cin >> i;
