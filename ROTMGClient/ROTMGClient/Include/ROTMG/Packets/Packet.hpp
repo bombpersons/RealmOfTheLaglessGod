@@ -14,8 +14,9 @@ namespace rotmg {
 		unsigned char id; // The identifier for the packet.
 
 		char data[100 * 1024]; // This is the data for the packet.
-							  // It is encoded using ARC4.
-							  // Use the packet decryptor to decrypt packets.
+							   // It is encoded using ARC4.
+							   // Use the packet decryptor to decrypt packets.
+
 	};
 }
 

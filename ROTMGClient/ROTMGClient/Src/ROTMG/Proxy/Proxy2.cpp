@@ -196,7 +196,8 @@ void Proxy::Outgoing(Packet& _pac) {
 	Packet dec = PacketDecryptor::DecryptOutPacket(_pac, encryption);
 
 	// We need to reconnect if we get a packet telling us so...
-	if (dec.id == 9) {
+	if (dec.id == PacketID::RECONNECT) {
+		// We need to make sure the client reconnects to us.
 
 	}
 

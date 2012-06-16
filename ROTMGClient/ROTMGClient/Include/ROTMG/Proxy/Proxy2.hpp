@@ -6,6 +6,7 @@
 
 #include <ROTMG/Encryption/Encryption.hpp>
 #include <ROTMG/Packets/PacketBuffer.hpp>
+#include <ROTMG/Packets/PacketID.hpp>
 
 #include <fstream>
 
