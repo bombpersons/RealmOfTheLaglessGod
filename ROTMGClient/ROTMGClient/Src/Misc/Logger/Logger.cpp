@@ -15,7 +15,7 @@ void Logger::Trace(const char* _string, ...) {
 	// Start the va list and do the dealy majigs.
 	va_list va;
 	va_start(va, _string);
-	vsprintf(buffer, _string, va);
+	vsnprintf(buffer,sizeof(buffer), _string, va);
 	va_end(va);
 
 	// Trace this.
