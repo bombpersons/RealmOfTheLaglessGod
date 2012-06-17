@@ -4,41 +4,11 @@
 #include <ROTMG/Proxy/Proxy2.hpp>
 #include <ROTMG/Queues/InQueue.hpp>
 #include <ROTMG/Connections/ConnectionListener.hpp>
+#include <ROTMG/Queues/ByteBuffer.hpp>
+#include <ROTMG/Queues/OutQueue.hpp>
+#include <ROTMG/Queues/EncryptorOutQueue.hpp>
+#include <ROTMG/Queues/DecryptorInQueue.hpp>
 #include <concurrent_vector.h>
-
-class TempPacket {
-public:
-	// Vars
-	char* buffer;
-	unsigned int bufSize;
-
-	// Constructor
-	TempPacket() {
-		buffer = 0;
-		bufSize = 0;
-	}
-	TempPacket(const char* _buffer, unsigned int _bufSize) {
-		buffer = new char[_bufSize];
-		bufSize = _bufSize;
-		memcpy(buffer, _buffer, _bufSize);
-	}
-	~TempPacket() {
-		if (buffer) delete [] buffer;
-	}
-
-	void Copy(const TempPacket& _cpy) {
-		buffer = new char[_cpy.bufSize];
-		bufSize = _cpy.bufSize;
-		memcpy(buffer, _cpy.buffer, _cpy.bufSize);
-	}
-	TempPacket(const TempPacket& _cpy) {
-		Copy(_cpy);
-	}
-	TempPacket& operator = (const TempPacket& _cpy) {
-		Copy(_cpy);
-		return *this;
-	}
-};
 
 class Listener : public rotmg::ConnectionListener {
 public:
@@ -47,7 +17,7 @@ public:
 
 	// What to do when we get a new connection
 	virtual bool OnNewConnection(sf::TcpSocket* _socket) {
-		rotmg::InQueue<TempPacket>* queue = new rotmg::InQueue<TempPacket>(1024 * 1024, _socket);
+		rotmg::InQueue* queue = new rotmg::DecryptorInQueue(1024, _socket);
 		queue->Start();
 		queues.push_back(queue);
 		return true;
@@ -57,9 +27,11 @@ public:
 	void PrintStuff() {
 		while (IsRunning()) {
 			for (VectorType::iterator it = queues.begin(); it != queues.end(); ++it) {
-				TempPacket packet;
+				rotmg::ByteBuffer packet;
 				if ((*it)->PopBack(packet)) {
+					Logger::Trace("Queue size: %u Data: ", (*it)->GetQueueLength());
 					Logger::TraceBuffer(packet.buffer, packet.bufSize);
+					Logger::Trace("\n");
 				}
 			}
 		}
@@ -67,7 +39,7 @@ public:
 
 private:
 	// A list of connections to update from.
-	typedef Concurrency::concurrent_vector<rotmg::InQueue<TempPacket>* > VectorType;
+	typedef Concurrency::concurrent_vector<rotmg::InQueue* > VectorType;
 	VectorType queues;
 };
 
@@ -83,6 +55,15 @@ int main(int _argc, char** _argv) {
 	listener.Listen(800);
 	listener.Start();
 	listener.PrintStuff();
+
+	// Create an out queue
+	/*rotmg::EncryptorOutQueue out;
+	out.Connect("127.0.0.1", 800);
+	out.Start();
+	rotmg::ByteBuffer test("Testing\n", strlen("Testing\n"));
+	while (out.IsRunning()) {
+		out.Push(test);
+	}*/
 
 	int i;
 	std::cin >> i;

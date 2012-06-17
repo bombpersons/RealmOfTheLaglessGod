@@ -1,18 +1,18 @@
 #ifndef ROTMG_INQUEUE
-#define ROTMG_INGUEUE
+#define ROTMG_INQUEUE
 
 #include <string>
 #include <concurrent_queue.h>
 #include <SFML/Network.hpp>
 #include <Misc/Logger/Logger.hpp>
+#include <ROTMG/Queues/ByteBuffer.hpp>
 
 namespace rotmg {
 	/// This queue will listen to socket and fill up a queue with the resultant packets.
-	template <typename T>
 	class InQueue {
 	private:
 		// Vars
-		Concurrency::concurrent_queue<T> queue;
+		Concurrency::concurrent_queue<ByteBuffer> queue;
 
 		// A listener and a socket to listen on.
 		sf::TcpSocket* socket;
@@ -69,12 +69,12 @@ namespace rotmg {
 		}
 
 		// Pop a packet off the queue.
-		bool PopBack(T& _t) {
+		bool PopBack(ByteBuffer& _t) {
 			return queue.try_pop(_t);
 		}
 
 		// Push a packet onto the queue.
-		void PushFront(const T& _packet) {
+		void PushFront(const ByteBuffer& _packet) {
 			queue.push(_packet);
 		}
 
@@ -92,6 +92,16 @@ namespace rotmg {
 		// Return whether or not this queue is running
 		bool IsRunning() {
 			return running;
+		}
+
+		// Get the size of the queue (unsafe)
+		unsigned int GetQueueLength() {
+			return queue.unsafe_size();
+		}
+
+		// Called when a packet is popped from the queue.
+		virtual void OnReceive(ByteBuffer& _t) {
+			// Decrypt the packet or something here.
 		}
 
 	protected:
@@ -120,8 +130,10 @@ namespace rotmg {
 					return;
 				}
 
-				// Make a T with this data.
-				T t((const char*)buffer, size);
+				// Make a ByteBuffer with this data.
+				ByteBuffer t;
+				t.Fill((char*)buffer, size);
+				OnReceive(t);
 				PushFront(t);
 			}
 		}

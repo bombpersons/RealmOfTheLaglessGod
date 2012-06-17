@@ -82,6 +82,9 @@
     <ClCompile Include="Src\Misc\Endian.cpp" />
     <ClCompile Include="Src\Misc\Logger\Logger.cpp" />
     <ClCompile Include="Src\ROTMG\Connections\ConnectionListener.cpp" />
+    <ClCompile Include="Src\ROTMG\Encryption\ARC4.cpp" />
+    <ClCompile Include="Src\ROTMG\Encryption\ARC4Decryptor.cpp" />
+    <ClCompile Include="Src\ROTMG\Encryption\ARC4Encryptor.cpp" />
     <ClCompile Include="Src\ROTMG\Encryption\Encryption.cpp" />
     <ClCompile Include="Src\ROTMG\Encryption\PacketDecryptor.cpp" />
     <ClCompile Include="Src\ROTMG\Exception\Exception.cpp" />
@@ -90,7 +93,6 @@
     <ClCompile Include="Src\ROTMG\Packets\Packets\Failure.cpp" />
     <ClCompile Include="Src\ROTMG\Packets\Packets\PacketFactory.cpp" />
     <ClCompile Include="Src\ROTMG\Proxy\Proxy2.cpp" />
-    <ClCompile Include="Src\ROTMG\Queues\InQueue.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\ARC4\ARC4.hpp" />
@@ -473,6 +475,8 @@
     <ClInclude Include="Include\Misc\Endian.hpp" />
     <ClInclude Include="Include\Misc\Logger\Logger.hpp" />
     <ClInclude Include="Include\ROTMG\Connections\ConnectionListener.hpp" />
+    <ClInclude Include="Include\ROTMG\Encryption\ARC4Decryptor.hpp" />
+    <ClInclude Include="Include\ROTMG\Encryption\ARC4Encryptor.hpp" />
     <ClInclude Include="Include\ROTMG\Encryption\Encryption.hpp" />
     <ClInclude Include="Include\ROTMG\Encryption\PacketDecryptor.hpp" />
     <ClInclude Include="Include\ROTMG\Exception\Exception.hpp" />
@@ -482,7 +486,11 @@
     <ClInclude Include="Include\ROTMG\Packets\PacketID.hpp" />
     <ClInclude Include="Include\ROTMG\Packets\Packets\Failure.hpp" />
     <ClInclude Include="Include\ROTMG\Proxy\Proxy2.hpp" />
+    <ClInclude Include="Include\ROTMG\Queues\ByteBuffer.hpp" />
+    <ClInclude Include="Include\ROTMG\Queues\EncryptorOutQueue.hpp" />
     <ClInclude Include="Include\ROTMG\Queues\InQueue.hpp" />
+    <ClInclude Include="Include\ROTMG\Queues\IByteBuffer.hpp" />
+    <ClInclude Include="Include\ROTMG\Queues\OutQueue.hpp" />
     <ClInclude Include="Include\SFML\Audio.hpp" />
     <ClInclude Include="Include\SFML\Audio\Export.hpp" />
     <ClInclude Include="Include\SFML\Audio\Listener.hpp" />
@@ -564,8 +572,10 @@
     <ClInclude Include="Include\SFML\Window\Window.hpp" />
     <ClInclude Include="Include\SFML\Window\WindowHandle.hpp" />
     <ClInclude Include="Include\SFML\Window\WindowStyle.hpp" />
+    <ClInclude Include="Include\ROTMG\Queues\DecryptorInQueue.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Include\ROTMG\Encryption\ARC4.hpp" />
     <None Include="Include\SFML\Graphics\Rect.inl" />
     <None Include="include\sfml\system\thread.inl" />
     <None Include="include\sfml\system\threadlocalptr.inl" />

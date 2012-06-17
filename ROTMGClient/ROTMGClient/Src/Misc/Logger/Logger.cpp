@@ -24,10 +24,12 @@ void Logger::Trace(const char* _string, ...) {
 
 // Trace
 void Logger::TraceText(const char* _string) {
-	printf(_string);
+	fwrite(_string, 1, strlen(_string), stdout);
+	fflush(stdout);
 }
 
 // Trace Buffer
 void Logger::TraceBuffer(const char* _string, unsigned int _size) {
 	fwrite(_string, 1, _size, stdout);
+	fflush(stdout);
 }
